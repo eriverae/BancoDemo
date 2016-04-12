@@ -1,0 +1,103 @@
+<ui:composition template="/WEB-INF/templates/layout.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+   <ui:define name="content">
+       <h:form id="forma">
+           <p:messages id="mensajes"/>
+           <p:dataTable id="tablaClientes" var="cte" value="#{gestorClientes.listaClientes}">
+               <p:column headerText="Identificación" style="width:15%">
+                   <h:outputText value="#{cte.identificacion}"/>
+               </p:column>
+               <p:column headerText="Nombre" style="width:30%">
+                   <h:outputText value="#{cte.nombre}"/>
+               </p:column>
+               <p:column headerText="Fecha Nacimiento" style="width:25%">
+                   <h:outputText value="#{cte.fechaNacimiento}">
+                       <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+                   </h:outputText>   
+               </p:column>
+               
+               <p:column style="width:15%">
+                   <p:commandLink value="Eliminar"
+                        action="#{gestorClientes.setClienteSelected(cte)}"
+                        oncomplete="PF('confirmation').show()"/>
+               </p:column>
+               <p:column style="width:15%">
+                   <p:commandLink id="editLink" 
+                                  update=":editarClienteDlg" 
+                                  value="Editar"
+                                  action="#{gestorClientes.setClienteSelected(cte)}"
+                                  oncomplete="PF('dlgEdit').show()"/>
+               </p:column>
+           </p:dataTable>           
+       </h:form>
+       
+       <p:confirmDialog id="confirmDialog" message="¿Esta seguro de eliminar el cliente?"  
+                header="Verificar eliminación"
+                appendTo="@(body)"
+                severity="alert"
+                widgetVar="confirmation">  
+            <h:form>           
+              <p:commandButton id="confirm" 
+                               value="Si" 
+                               update=":forma" 
+                               oncomplete="PF('confirmation').hide()"  
+                               actionListener="#{gestorClientes.eliminarCliente()}" />  
+              <p:commandButton id="decline" value="No" onclick="PF('confirmation').hide()" type="button" />   
+            </h:form>      
+       </p:confirmDialog>
+       
+       <p:dialog id="editarClienteDlg" widgetVar="dlgEdit" 
+                 header="Crear/Modificar Cliente" closable="false" 
+                 dynamic="true">
+           <h:form id="frmEdit">
+                <p:messages id="msgs"/>
+                <h:panelGrid id="display" columns="3">
+                    <h:outputLabel for="tipoID" value="Tipo identificacion: *" />
+                    <p:selectOneMenu id="tipoID" value="#{gestorClientes.cliente.tipoIdentificacion}" >
+                        <f:selectItems value="#{gestorClientes.tipoIdentifiacionValues()}" />
+                    </p:selectOneMenu>
+                    <p:message for="tipoID" display="icon"/>
+
+                    <h:outputLabel for="identificacion" value="Identificación: *" />
+                    <p:inputText id="identificacion" value="#{gestorClientes.cliente.identificacion}" 
+                                 required="true" label="Identificación" size="10">
+                        <f:validateLength minimum="2" />
+                    </p:inputText>
+
+                    <p:message for="identificacion" id="msgIdentificacion" display="icon"/>
+                    <h:outputLabel for="nombre" value="Nombre: *" />
+                    <p:inputText id="nombre" value="#{gestorClientes.cliente.nombre}" label="Nombre" required="true" size="30">
+                        <f:validateLength minimum="2" />
+                    </p:inputText>
+                    <p:message for="nombre" id="msgNombre" display="icon"/>
+                    <h:outputLabel for="genero" value="Genero: *" />
+                    <p:selectOneRadio id="genero" value="#{gestorClientes.cliente.genero}">
+                        <f:selectItems value="#{gestorClientes.generoValues()}" 
+                                       var="item"
+                                       itemLabel="#{item.label}"
+                                       itemValue="#{item.value}"
+                                       />
+                    </p:selectOneRadio>
+                    <p:message for="genero" display="icon"/>
+
+                    <h:outputLabel for="fechaNacimiento" value="Fecha nacimiento: *" />
+                    <p:calendar id="fechaNacimiento" value="#{gestorClientes.cliente.fechaNacimiento}"/>
+                    <p:message for="fechaNacimiento" display="icon"/>
+                </h:panelGrid>
+           
+                <center>
+                    <p:commandButton id="btnEditarCliente" 
+                                     value="Guardar" 
+                                     update=":frmEdit:msgs :forma:tablaClientes"
+                                     actionListener="#{gestorClientes.modificarCliente()}"/>
+                    
+                    <p:commandButton id="btnCerrar" value="Cerrar" update=":forma" onclick="PF('dlgEdit').hide()"/>
+                </center>
+             </h:form> 
+       </p:dialog>
+ </ui:define>
+</ui:composition>

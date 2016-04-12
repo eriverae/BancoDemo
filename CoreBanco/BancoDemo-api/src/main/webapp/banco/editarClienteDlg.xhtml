@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Modificar Cliente</title>
+        <style type="text/css">
+            .ui-widget {
+                font-size: 90%;
+            }
+        </style>
+    </h:head>
+    <h:body>
+        <h:form id="frmEdit">
+            <p:messages id="msgs"/>
+            <h:panelGrid id="display" columns="3">
+                <h:outputLabel for="tipoID" value="Tipo identificacion: *" />
+                <p:selectOneMenu id="tipoID" value="#{gestorClientes.cliente.tipoIdentificacion}" >
+                    <f:selectItems value="#{gestorClientes.tipoIdentifiacionValues()}" />
+                </p:selectOneMenu>
+                <p:message for="tipoID" display="icon"/>
+
+                <h:outputLabel for="identificacion" value="Identificación: *" />
+                <p:inputText id="identificacion" value="#{gestorClientes.cliente.identificacion}" 
+                             required="true" label="Identificación" size="10">
+                    <f:validateLength minimum="2" />
+                </p:inputText>
+
+                <p:message for="identificacion" id="msgIdentificacion" display="icon"/>
+                <h:outputLabel for="nombre" value="Nombre: *" />
+                <p:inputText id="nombre" value="#{gestorClientes.cliente.nombre}" label="Nombre" required="true" size="30">
+                    <f:validateLength minimum="2" />
+                </p:inputText>
+                <p:message for="nombre" id="msgNombre" display="icon"/>
+                <h:outputLabel for="genero" value="Genero: *" />
+                <p:selectOneRadio id="genero" value="#{gestorClientes.cliente.genero}">
+                    <f:selectItems value="#{gestorClientes.generoValues()}" 
+                                   var="item"
+                                   itemLabel="#{item.label}"
+                                   itemValue="#{item.value}"
+                                   />
+                </p:selectOneRadio>
+                <p:message for="genero" display="icon"/>
+
+                <h:outputLabel for="fechaNacimiento" value="Fecha nacimiento: *" />
+                <p:calendar id="fechaNacimiento" value="#{gestorClientes.cliente.fechaNacimiento}"/>
+                <p:message for="fechaNacimiento" display="icon"/>
+            </h:panelGrid>
+            <center>
+                <p:commandButton id="btnEditarCliente" 
+                                 value="Guardar" 
+                                 actionListener="#{gestorClientes.modificarCliente()}"/>
+                <p:commandButton id="btnCerrar" value="Cerrar" actionListener="#{gestorClientes.closeDialogoModificar}"/>
+            </center>
+        </h:form> 
+    </h:body>   
+</html>
+

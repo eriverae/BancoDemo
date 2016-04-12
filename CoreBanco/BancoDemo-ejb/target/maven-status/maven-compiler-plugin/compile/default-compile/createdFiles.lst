@@ -1,0 +1,3 @@
+com\banco\ejb\CuentaFacade.class
+com\banco\ejb\AbstractFacade.class
+com\banco\ejb\ClienteFacade.class

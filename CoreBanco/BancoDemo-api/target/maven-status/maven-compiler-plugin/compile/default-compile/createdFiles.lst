@@ -1,0 +1,15 @@
+com\banco\exception\BancoExceptionHandlerFactory.class
+com\banco\errorhandling\BancoExceptionMapper.class
+com\banco\errorhandling\ErrorMessage.class
+com\banco\filter\LoginFilter.class
+com\banco\pagination\PaginatedListWrapper.class
+com\banco\rest\ApplicationConfig.class
+com\banco\ws\BancoService.class
+com\banco\rest\ClientesResource.class
+com\banco\controller\GestorClientesController.class
+com\banco\controller\LoginController.class
+com\banco\controller\ClienteController.class
+com\banco\controller\CuentaController.class
+com\banco\controller\UtilController.class
+com\banco\exception\BancoExceptionHandler.class
+com\banco\rest\CuentasResource.class

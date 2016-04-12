@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head></h:head> 
+    <body> 
+        <h:form id="loginForm">
+            <p:growl id="growl" globalOnly="true" showDetail="true"></p:growl>
+
+            
+            <div align="center" style="margin-top: 150px">
+                <p:panel header="Autenticación de usuarios" style="width: 400px">
+                    <h:panelGrid id="loginPanel" columns="2">
+                        <h:outputText value="Usuario:" />
+                        <p:inputText id="username" value="#{loginController.username}" required="true"></p:inputText>
+                        <p:spacer></p:spacer>
+                        <p:message for="username" ></p:message>
+                        <h:outputText value="Password:" />
+                        <p:password id="password" value="#{loginController.password}" required="true" feedback="false"></p:password>
+                        <p:spacer></p:spacer>
+                        <p:message for="password"></p:message>
+                        <p:spacer></p:spacer>
+                        <p:commandButton action="#{loginController.autenticar}" value="Login" update="loginForm:growl" ajax="true"></p:commandButton>
+                    </h:panelGrid>
+                </p:panel>
+            </div>
+        </h:form>
+    </body> 
+</html>

@@ -1,0 +1,50 @@
+<ui:composition template="/WEB-INF/templates/layout.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+    <ui:define name="content">
+           
+        <h:form id="frmCuenta">
+                <p:panel id="panel" header="Nueva Cuenta">
+                <p:messages id="msgs"/>
+
+                <h:panelGrid columns="3">
+                  
+                    <h:outputLabel for="tipoID" value="Tipo identificacion: *" />
+                    <p:selectOneMenu id="tipoID" value="#{cuentaController.tipoID}">
+                        <f:selectItems value="#{utilController.tipoIdentifiacionValues()}" />
+                    </p:selectOneMenu> 
+                    <p:message for="tipoID" id="msgTipoID" display="icon"/>
+
+                    <h:outputLabel for="identificacion" value="Identificación: *" />
+                    <p:inputText id="identificacion" value="#{cuentaController.identificacion}" 
+                                 required="true" label="Identificación" size="10">
+                        <p:ajax event="blur" listener="#{cuentaController.verificarCliente}" process="tipoID,identificacion" update="nombre,msgs" />
+                        <f:validateLength minimum="2" />
+                    </p:inputText>
+                    <p:message for="identificacion" id="msgIdentificacion" display="icon"/>
+                    <h:outputLabel for="nombre" value="Nombre:"/>
+                    <p:inputText id="nombre" value="#{cuentaController.nombreCliente}" label="Nombre" size="30" disabled="true"/>
+                    <p:message for="nombre" id="msgNombre" display="icon"/> 
+                    
+                    <h:outputLabel for="saldo" value="Saldo inicial: *"/>
+                    <p:inputText id="saldo" value="#{cuentaController.cuenta.saldo}" label="Saldo inicial" required="true" size="10">
+                        <f:convertNumber maxIntegerDigits="10" maxFractionDigits="1" pattern="#########0.0"/>
+                    </p:inputText>
+                    <p:message for="saldo" id="msgSaldo" display="icon"/> 
+                    
+                </h:panelGrid>
+
+                <p:commandButton id="btnCrearCuenta" value="Crear cuenta" update="panel" actionListener="#{cuentaController.crearCuenta}"/>
+            </p:panel>
+        </h:form>
+
+    </ui:define>
+</ui:composition>
+
+
+
+
+

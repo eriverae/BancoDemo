@@ -1,0 +1,93 @@
+<div class="col-md-6 col-md-offset-3">
+  <!-- Verify person, if there is no id present, that we are Adding a Person -->
+  <div ng-if="cliente.id == null">
+    <h3>Crear nuevo Cliente</h3>
+  </div>
+  <!-- Otherwise it's an Edit -->
+  <div ng-if="cliente.id != null">
+    <h3>Modificar Cliente</h3>
+  </div>
+
+  <div>
+    <!-- Specify the function to be called on submit and disable HTML5 validation, since we're using Angular validation-->
+    <form class="form-horizontal" name="clienteForm" ng-submit="updateCliente()" novalidate>
+      
+      <div class="form-group" ng-class="{'has-error' : clienteForm.IdType.$invalid && clienteForm.IdType.$dirty}">
+        <label for="IdType">Tipo identificacion:</label>
+        <!-- Display a check when the field is valid and was modified -->
+        <span ng-class="{'glyphicon glyphicon-ok' : clienteForm.IdType.$valid && clienteForm.IdType.$dirty}"></span>
+        <select name="IdType" id="IdType" ng-model="cliente.tipoIdentificacion" required>
+          <option ng-repeat="option in listaTiposIdentificacion" value="{{option.id}}">{{option.name}}</option>
+        </select>
+        <!--
+        <p class="help-block" ng-show="clienteForm.IdType.$error.required">Seleccione tipo de identificacion.</p>
+        -->
+      </div>
+      
+      <!-- Display an error if the input is invalid and is dirty (only when someone changes the value) -->
+      <div class="form-group" ng-class="{'has-error' : clienteForm.identification.$invalid && clienteForm.identification.$dirty}">
+        <label for="identification">Identificacion:</label>
+        <!-- Display a check when the field is valid and was modified -->
+        <span ng-class="{'glyphicon glyphicon-ok' : clienteForm.identification.$valid && clienteForm.identification.$dirty}"></span>
+
+        <input id="identification" name="identification" type="number" class="form-control" maxlength="20"
+               ng-model="cliente.identificacion" required ng-minlength="2" ng-maxlength="20"
+               placeholder="Ingrese el número de identificación"/>
+
+        <!-- Validation messages to be displayed on required, minlength and maxlength -->
+        <p class="help-block" ng-show="clienteForm.identification.$error.minlength">Debe tener al menos 3 digitos.</p>
+        <p class="help-block" ng-show="clienteForm.identification.$error.maxlength">La identifiacion no debe superar 20 digitos.</p>
+      </div>
+      
+      <!-- Display an error if the input is invalid and is dirty (only when someone changes the value) -->
+      <div class="form-group" ng-class="{'has-error' : clienteForm.name.$invalid && clienteForm.name.$dirty}">
+        <label for="name">Nombre:</label>
+        <!-- Display a check when the field is valid and was modified -->
+        <span ng-class="{'glyphicon glyphicon-ok' : clienteForm.name.$valid && clienteForm.name.$dirty}"></span>
+
+        <input id="name" name="name" type="text" class="form-control" maxlength="50"
+               ng-model="cliente.nombre" required ng-minlength="2" ng-maxlength="50" placeholder="Ingrese el nombre completo"/>
+
+        <!-- Validation messages to be displayed on required, minlength and maxlength -->
+        <p class="help-block" ng-show="clienteForm.name.$error.minlength">Debe tener al menos 2 caracteres.</p>
+        <p class="help-block" ng-show="clienteForm.name.$error.maxlength">El nombre no debe superar 50 characters.</p>
+      </div>
+      
+      <div class="form-group" ng-class="{'has-error' : clienteForm.gender.$invalid && clienteForm.gender.$dirty}">
+        <label for="gender">Genero:</label>
+        <!-- Display a check when the field is valid and was modified -->
+        <!--
+        <span ng-class="{'glyphicon glyphicon-ok' : clienteForm.gender.$valid && clienteForm.gender.$dirty}"></span>
+        -->
+        <div ng-repeat="item in listaGeneros">
+          <label class="radio-inline">
+            <input id="gender" name="gender" type="radio" ng-model="cliente.genero"  value="{{item.id}}"/>{{item.label}}
+          </label>
+        </div>
+        <!-- Validation messages to be displayed on required, minlength and maxlength -->
+        <p class="help-block" ng-show="clienteForm.gender.$error.required">Seleccione genero.</p>
+      </div>
+      
+
+      <!-- Display an error if the input is invalid and is dirty (only when someone changes the value) -->
+      <div class="form-group" ng-class="{'has-error' : personForm.dateBirth.$invalid && personForm.dateBirth.$dirty}">
+        <label for="dateBirth">Fecha de nacimiento:</label>
+        <!-- Display a check when the field is valid and was modified -->
+        <span ng-class="{'glyphicon glyphicon-ok' : personForm.dateBirth.$valid && personForm.dateBirth.$dirty}"></span>
+
+        <input id="dateBirth" name="dateBirth" type="date" class="form-control" placeholder="dd/MM/yyyy"
+               ng-model="cliente.fechaNacimiento"
+               required ng-minlength="5" ng-maxlength="100"/>
+
+        <!-- Validation messages to be displayed on required, minlength and maxlength -->
+        <p class="help-block" ng-show="personForm.dateBirth.$error.required">Ingrese fecha de nacimiento.</p>
+      </div>
+
+      <!-- Form buttons. The 'Save' button is only enabled when the form is valid. -->
+      <div class="buttons">
+        <button type="button" class="btn btn-primary" ng-click="cancelar()">Cancelar</button>
+        <button type="submit" class="btn btn-primary" ng-disabled="clienteForm.$invalid">Guardar</button>
+      </div>
+    </form>
+  </div>
+</div>

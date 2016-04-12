@@ -1,0 +1,53 @@
+
+
+<!-- Specify a Angular controller script that binds Javascript variables to the feedback messages>
+<div class="message" ng-controller="alertMessagesController">
+    <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+</div>
+-->
+<!--div class="row">
+    <form class="navbar-form navbar-left">
+        <div class="container-fluid">
+            <div class="form-group">
+                <label class="navbarText col-sm-2">Filtrar por nombre:</label>
+                <div class="col-sm-10">
+                    <input type="text"
+                           data-ng-model="searchText"
+                           data-ng-change="searchTextChanged()"
+                           class="novalidate form-control" />
+                </div>
+                <a href="#"><span class="glyphicon glyphicon-plus"></span> Nuevo Cliente</a>
+            </div>
+        </div>
+    </form>
+<div-->
+
+<!-- Specify a Angular controller script that binds Javascript variables to the grid.-->
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="col-xs-4">
+            <label for="filtro">Filtrar por Nombre:</label>
+            <input type="text" id="filtro"
+                   data-ng-model="searchText"
+                   data-ng-change="searchTextChanged()"
+                   />
+        </div>  
+        <a ui-sref="crearCliente"><span class="glyphicon glyphicon-plus"></span> Nuevo Cliente</a>
+    </div>
+    <div class="panel-body">
+        <div class="grid">
+            <div>
+                <h3>Lista de clientes</h3>
+            </div>
+            <!-- Binds the grid component to be displayed. -->
+            <div class="gridStyle" ng-grid="gridOptions"></div>
+
+            <!--  Bind the pagination component to be displayed. -->
+            <pagination direction-links="true" boundary-links="true"
+                        total-items="clientes.totalResults" items-per-page="clientes.pageSize"
+                        ng-model="clientes.currentPage" ng-change="refreshGrid()">
+            </pagination>
+        </div>
+    </div>
+</div>
+

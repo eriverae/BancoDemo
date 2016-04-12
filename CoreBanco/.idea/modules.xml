@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/BancoDemo.iml" filepath="$PROJECT_DIR$/BancoDemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/BancoDemo-ear/BancoDemo-ear.iml" filepath="$PROJECT_DIR$/BancoDemo-ear/BancoDemo-ear.iml" />
+      <module fileurl="file://$PROJECT_DIR$/BancoDemo-ejb/BancoDemo-ejb.iml" filepath="$PROJECT_DIR$/BancoDemo-ejb/BancoDemo-ejb.iml" />
+      <module fileurl="file://$PROJECT_DIR$/BancoDemo-web/BancoDemo-web.iml" filepath="$PROJECT_DIR$/BancoDemo-web/BancoDemo-web.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> 
+<html lang="en" ng-app="demobanco" class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Banco Web App</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="lib/dependencies/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="lib/dependencies/css/ng-grid.min.css" />
+        <link rel="stylesheet" type="text/css" href="css/style.css"/>
+        <link rel="stylesheet" type="text/css" id="theme" href="css/theme-default.css"/>
+    </head>
+    <body>
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <li class="active"><a ui-sref="home">Home</a></li>
+                    <a class="navbar-brand" ui-sref="#">Central Bank</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li class="active"><a ui-sref="home">Home</a></li>
+                    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Clientes <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a ui-sref="clientes">Listar clientes</a></li>
+                            <li><a ui-sref="crearCliente">Crear cliente</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Page 2</a></li>
+                    <li><a href="#">Page 3</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#"><span class="glyphicon glyphicon-user"></span> Usuario</a></li>
+                    <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                </ul>
+            </div>
+        </nav>
+
+
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <div class="container">   
+          <div ui-view></div>
+        </div>
+
+
+        <!-- In production use:
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+        -->
+        <script src="lib/dependencies/jquery.min.js"></script>
+        <script src="lib/dependencies/angular/angular.js"></script>
+        <script src="lib/dependencies/angular-ui-router/release/angular-ui-router.js"></script>
+        <script src="lib/dependencies/angular-resource.min.js"></script>
+        <script src="lib/dependencies/ng-grid-2.0.11.min.js"></script>
+        <script src="lib/dependencies/ui-bootstrap-tpls.min.js"></script>
+        
+        <!-- Dependencias aplicacion Banco -->
+        <script src="app.js"></script>
+        <script src="utils/utils.js"></script>
+        <script src="services/bancoServices.js"></script>
+        <script src="clientes/clientes.js"></script>
+        <script src="clientes/clienteFormController.js"></script>
+        
+    </body>
+</html>
